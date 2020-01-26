@@ -172,7 +172,7 @@ def run_train_epoch(model, data_loader, optimizer):
 
         loss = model(inputs, inputs_c, mask, spans=sub_span, polarity=polarity,
                      polarity_mask=mask_p, ote = ote, te=te,ote_te=ote_te,oe=oe,oe_split=oe_split)
-        # loss.backward()
+        loss.backward()
         running_loss += loss.item()
         optimizer.step()
         model.zero_grad()
