@@ -169,10 +169,7 @@ def run_train_epoch(model, data_loader, optimizer):
         ote_te = torch.tensor([ote_tes[i]])
         oe = torch.tensor([oe_alls[i]])
         oe_split = torch.tensor([oe_splits[i]])
-        # inputs, inputs_c, mask, sub_span, polarity, mask_p, ote, te, ote_te,oe,oe_split = batch
 
-        # print(inputs.size())
-        # print(ote.size())
         loss = model(inputs, inputs_c, mask, spans=sub_span, polarity=polarity,
                      polarity_mask=mask_p, ote = ote, te=te,ote_te=ote_te,oe=oe,oe_split=oe_split)
         # loss.backward()
