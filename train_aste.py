@@ -536,7 +536,6 @@ if __name__ == '__main__':
     data_helper_dev, features_dev = build_data(args.dev_file, vocab, mode="test")
     data_helper_test, features_test = build_data(args.test_file, vocab, mode="test")
 
-    model_path = args.model_path
 
     num_embeddings = vocab.vocab_size
     num_embeddings_c = len(vocab.char2ids.keys())
