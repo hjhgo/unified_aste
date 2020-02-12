@@ -571,5 +571,5 @@ if __name__ == '__main__':
 
     else:
         # model = nn.DataParallel(model)
-        model.load_state_dict(torch.load(args.sentiment_model_path))
+        model.load_state_dict(torch.load(args.model_path))
         evaluate(model, features_test, features_test)
