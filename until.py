@@ -251,26 +251,21 @@ class Vocab:
 
 
     def load_word_embedding(self,embedding_file=None,embedding_dim = 300):
-        self.embedding_vec = np.random.uniform(-0.25, 0.25,size=[len(self.word2ids.keys()),embedding_dim])
-        size = 0
-        if embedding_file != None:
-            embedding_dict = {}
-            with open(embedding_file,encoding="utf-8") as fp:
-                for l in tqdm(fp):
-                    l = l.strip().split(" ")
-                    word = l[0]
-                    vec = list(map(float,l[1:]))
-                    embedding_dict[word] = vec
-                for i,word in enumerate(self.words):
-                    try:
-                        if word in embedding_dict.keys():
-                            size+=1
-                            self.embedding_vec[i] = embedding_dict[word]
-                    except Exception as e:
-                        pass
-        print("load embedding form glove ",size)
-        return self.embedding_vec
+        self.embeddings = np.random.uniform(-0.25, 0.25,size=[len(self.word2ids.keys()),embedding_dim])
 
+        if embedding_file is not None:
+            count = 0
+            with open (embedding_file, encoding="utf-8", mode="r") as f:
+                for l in tqdm.tqdm (f):
+                    word_embedding = l.split (" ")
+                    word = word_embedding[0]
+                    embedding = word_embedding[1:]
+                    if word in self.words:
+                        i = self.words2ids[word]
+                        self.embeddings[i] = embedding
+                        count += 1
+            print (" get word embedding from glove ", count)
+        return self.embeddings
 
     def load_char_embedding(self,embedding_file=None):
         pass
